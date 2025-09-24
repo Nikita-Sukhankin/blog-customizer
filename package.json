@@ -72,9 +72,7 @@
 		"build-storybook": "storybook build"
 	},
 	"eslintConfig": {
-		"extends": [
-			"plugin:storybook/recommended"
-		]
+		"extends": []
 	},
 	"dependencies": {
 		"clsx": "^2.1.0",
