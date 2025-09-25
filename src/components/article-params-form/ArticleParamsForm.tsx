@@ -33,7 +33,7 @@ export const ArticleParamsForm = ({
 	const arrowRef = useRef<HTMLDivElement>(null); // Ref для кнопки-стрелки
 
 	// Состояние открытия/закрытия панели
-	const [isOpen, setIsOpen] = useState(false);
+	const [isMenuOpen, setIsMenuOpen] = useState(false);
 	// Локальное состояние формы
 	const [formState, setFormState] = useState<ArticleStateType>(initialValues);
 
@@ -47,12 +47,12 @@ export const ArticleParamsForm = ({
 				arrowRef.current &&
 				!arrowRef.current.contains(e.target as Node)
 			) {
-				setIsOpen(false); // Закрываем панель
+				setIsMenuOpen(false); // Закрываем панель
 			}
 		};
 
 		// Добавляем обработчик только когда панель открыта
-		if (isOpen) {
+		if (isMenuOpen) {
 			document.addEventListener('mousedown', handleClickOutside);
 		}
 
@@ -60,7 +60,7 @@ export const ArticleParamsForm = ({
 		return () => {
 			document.removeEventListener('mousedown', handleClickOutside);
 		};
-	}, [isOpen]); // Зависимость от состояния isOpen
+	}, [isMenuOpen]); // Зависимость от состояния isMenuOpen
 
 	// Обработчик отправки формы
 	const handleSubmit = (e: React.FormEvent) => {
@@ -80,9 +80,9 @@ export const ArticleParamsForm = ({
 			{/* Кнопка для открытия/закрытия панели */}
 			<ArrowButton
 				ref={arrowRef}
-				isOpen={isOpen}
+				isOpen={isMenuOpen}
 				onClick={() => {
-					setIsOpen((prevIsOpen) => !prevIsOpen);
+					setIsMenuOpen((prevIsMenuOpen) => !prevIsMenuOpen);
 				}}
 			/>
 
@@ -90,7 +90,7 @@ export const ArticleParamsForm = ({
 			<aside
 				ref={sidebarRef}
 				className={
-					isOpen
+					isMenuOpen
 						? `${styles.container} ${styles.container_open}`
 						: styles.container
 				}>
